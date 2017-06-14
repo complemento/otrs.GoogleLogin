@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_package version="1.0">
+    <Name>GoogleLogin</Name>
+    <Version>5.0.0</Version>
+    <Framework>5.0.x</Framework>
+    <Vendor>Complemento [Enterprise]</Vendor>
+    <URL>http://www.complemento.net.br/</URL>
+    <License>GNU GENERAL PUBLIC LICENSE Version 2, June 1991</License>
+    <Description Lang="en">Allows agent login using Google Authentication</Description>
+    <Filelist>
+        <File Permission="644" Location="Kernel/Config/Files/GoogleLogin.xml"></File>
+        <File Permission="644" Location="Kernel/Output/HTML/OutputFilterGoogleLogin.pm"></File>
+        <File Permission="644" Location="Kernel/Output/HTML/Templates/Standard/OutputFilterGoogleLogin.tt"></File>
+        <File Permission="644" Location="Kernel/System/Auth/Google.pm"></File>
+        <File Permission="644" Location="Custom/GoogleLogin.sopm"></File>
+    </Filelist>
+</otrs_package>
