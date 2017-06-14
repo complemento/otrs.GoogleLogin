@@ -1,0 +1,19 @@
+<script type="text/javascript">//<![CDATA[
+
+function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+    var form = $('<form action="" method="post">' +
+      '<input type="hidden" name="Action" value="Login" />' +
+      '<input type="hidden" name="User" value="1" />' +
+      '<input type="hidden" name="Password" value="' + id_token + '" />' +
+      '</form>');
+    $('body').append(form);
+    form.submit();
+}
+
+
+//]]></script>
+[% WRAPPER JSOnDocumentComplete %]
+
+[% END %]
+
