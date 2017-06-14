@@ -26,14 +26,38 @@ sub Run {
     my ( $Self, %Param ) = @_;
 	my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 	my $WebClientID = $Kernel::OM->Get('Kernel::Config')->Get( 'GoogleLogin::WebClientID' ) || '';
-	my $js = '<script src="https://apis.google.com/js/platform.js" async defer></script>
+	
+	my $js = '
+	<style type="text/css">
+		#LoginButton {
+			
+		}
+		.g-signin2 {
+			margin-top:	10px;
+			margin-left: auto;
+			margin-right: auto;
+			display: table;
+		}
+		.AltTextLogin {
+			margin-top: 12px;
+			color: #777;
+			text-align:center;
+			width: 100%;
+			margin-bottom: 10px;
+		}
+	</style>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<meta name="google-signin-client_id" content="'.$WebClientID.'">';
 
     ${ $Param{Data} } =~ s{(</head>)}{$js $1 }xms;
     
-    my $button ='</button><div class="Clear"><br/</div><div class="g-signin2" data-onsuccess="onSignIn"></div>';
+    my $button =''.
+    '<div class="Clear"></div>'.
+    "<div class=\"AltTextLogin\">Alternative Login</br>".
+		'<div class="g-signin2" data-height="30" data-onsuccess="onSignIn" data-longtitle="true"></div>'.
+	'</div></fieldset>';
 
-    ${ $Param{Data} } =~ s{(</button>)}{$button $1 }xms;    
+    ${ $Param{Data} } =~ s{(</fieldset>)}{$button $1 }xms;    
 	
 	my $Script = $LayoutObject->Output(
 	    	 TemplateFile => 'OutputFilterGoogleLogin',
