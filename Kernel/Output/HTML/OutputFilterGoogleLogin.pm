@@ -26,7 +26,7 @@ sub Run {
     my ( $Self, %Param ) = @_;
 	my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 	my $WebClientID = $Kernel::OM->Get('Kernel::Config')->Get( 'GoogleLogin::WebClientID' ) || '';
-	
+
 	my $js = '
 	<style type="text/css">
 		#LoginButton {
@@ -39,7 +39,7 @@ sub Run {
 			display: table;
 		}
 		.AltTextLogin {
-			margin-top: 12px;
+			margin-top: 22px;
 			color: #777;
 			text-align:center;
 			width: 100%;
@@ -51,13 +51,23 @@ sub Run {
 
     ${ $Param{Data} } =~ s{(</head>)}{$js $1 }xms;
     
-    my $button =''.
-    '<div class="Clear"></div>'.
-    "<div class=\"AltTextLogin\">Alternative Login</br>".
-		'<div class="g-signin2" data-height="30" data-onsuccess="onSignIn" data-longtitle="true"></div>'.
-	'</div></fieldset>';
 
-    ${ $Param{Data} } =~ s{(</fieldset>)}{$button $1 }xms;    
+
+	if ($Param{TemplateFile} eq 'Login'){
+		my $button =''.
+		'<div class="Clear"></div>'.
+		"<div class=\"AltTextLogin\">Alternative Login</br>".
+			'<div class="g-signin2" data-height="30" data-onsuccess="onSignIn" data-longtitle="true"></div>'.
+		'</div>';
+		${ $Param{Data} } =~ s{(</fieldset>)}{$button $1 }xms;
+	} else {
+		my $button =''
+		.'<div class="Clear"></div>'
+		."<div class=\"AltTextLogin\">Alternative Login</br>".
+			'<div class="g-signin2" data-height="30" data-onsuccess="onSignIn" data-longtitle="true"></div>'.
+		'</div>';
+		${ $Param{Data} } =~ s{(</div>\n\s*<div\sid="Reset">)}{$button $1}xms;
+	}
 	
 	my $Script = $LayoutObject->Output(
 	    	 TemplateFile => 'OutputFilterGoogleLogin',

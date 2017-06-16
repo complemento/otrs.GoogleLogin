@@ -10,6 +10,7 @@
                 <Item Key="Templates">
                     <Hash>
                         <Item Key="Login">1</Item>
+                        <Item Key="CustomerLogin">1</Item>
                     </Hash>
                 </Item>
             </Hash>

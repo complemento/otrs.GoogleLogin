@@ -12,6 +12,7 @@
         <File Permission="644" Location="Kernel/Output/HTML/OutputFilterGoogleLogin.pm"></File>
         <File Permission="644" Location="Kernel/Output/HTML/Templates/Standard/OutputFilterGoogleLogin.tt"></File>
         <File Permission="644" Location="Kernel/System/Auth/Google.pm"></File>
+        <File Permission="644" Location="Kernel/System/CustomerAuth/Google.pm"></File>
         <File Permission="644" Location="Custom/GoogleLogin.sopm"></File>
     </Filelist>
 </otrs_package>
