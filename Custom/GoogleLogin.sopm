@@ -3,7 +3,7 @@
     <Name>GoogleLogin</Name>
     <Version>5.0.0</Version>
     <Framework>5.0.x</Framework>
-    <Vendor>Complemento [Enterprise]</Vendor>
+    <Vendor>Complemento [Free]</Vendor>
     <URL>http://www.complemento.net.br/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 2, June 1991</License>
     <Description Lang="en">Allows agent login using Google Authentication</Description>
