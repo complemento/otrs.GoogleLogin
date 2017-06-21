@@ -6,7 +6,7 @@
     <Vendor>Complemento [Free]</Vendor>
     <URL>http://www.complemento.net.br/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 2, June 1991</License>
-    <Description Lang="en">Allows agent login using Google Authentication</Description>
+    <Description Lang="en">Allows agent and customer login using Google Authentication</Description>
     <Filelist>
         <File Permission="644" Location="Kernel/Config/Files/GoogleLogin.xml"></File>
         <File Permission="644" Location="Kernel/Output/HTML/OutputFilterGoogleLogin.pm"></File>
