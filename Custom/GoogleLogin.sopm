@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
     <Name>GoogleLogin</Name>
-    <Version>5.0.0</Version>
+    <Version>5.0.1</Version>
     <Framework>5.0.x</Framework>
     <Vendor>Complemento [Free]</Vendor>
     <URL>http://www.complemento.net.br/</URL>

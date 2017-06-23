@@ -32,7 +32,7 @@ sub Run {
 		#LoginButton {
 			
 		}
-		.g-signin2 {
+		#glogin {
 			margin-top:	10px;
 			margin-left: auto;
 			margin-right: auto;
@@ -46,7 +46,6 @@ sub Run {
 			margin-bottom: 10px;
 		}
 	</style>
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<meta name="google-signin-client_id" content="'.$WebClientID.'">';
 
     ${ $Param{Data} } =~ s{(</head>)}{$js $1 }xms;
@@ -57,21 +56,33 @@ sub Run {
 		my $button =''.
 		'<div class="Clear"></div>'.
 		"<div class=\"AltTextLogin\">Alternative Login</br>".
-			'<div class="g-signin2" data-height="30" data-onsuccess="onSignIn" data-longtitle="true"></div>'.
+			'<div id="glogin"></div>'.
 		'</div>';
 		${ $Param{Data} } =~ s{(</fieldset>)}{$button $1 }xms;
 	} else {
 		my $button =''
 		.'<div class="Clear"></div>'
 		."<div class=\"AltTextLogin\">Alternative Login</br>".
-			'<div class="g-signin2" data-height="30" data-onsuccess="onSignIn" data-longtitle="true"></div>'.
+			'<div id="glogin"></div>'.
 		'</div>';
 		${ $Param{Data} } =~ s{(</div>\n\s*<div\sid="Reset">)}{$button $1}xms;
+	}
+
+	my $Action = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'Action' ) || "";
+
+	if($Action eq "Logout"){
+		$Kernel::OM->Get('Kernel::Output::HTML::Layout')->Block(
+			Name => 'Logout',
+			Data => {
+			},
+		);
 	}
 	
 	my $Script = $LayoutObject->Output(
 	    	 TemplateFile => 'OutputFilterGoogleLogin',
-		     Data         => {},
+		     Data         => {
+				 GoogleClientID => $WebClientID
+			 },
     	);
 
     ${ $Param{Data} } .= $Script;

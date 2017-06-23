@@ -1,18 +1,51 @@
 <script type="text/javascript">//<![CDATA[
-
 function onSignIn(googleUser) {
-    var id_token = googleUser.getAuthResponse().id_token;
-    var form = $('<form action="" method="post">' +
-      '<input type="hidden" name="Action" value="Login" />' +
-      '<input type="hidden" name="User" value="1" />' +
-      '<input type="hidden" name="Password" value="' + id_token + '" />' +
-      '</form>');
-    $('body').append(form);
-    form.submit();
+		var id_token = googleUser.getAuthResponse().id_token;
+		var form = $('<form action="" method="post">' +
+		  '<input type="hidden" name="Action" value="Login" />' +
+		  '<input type="hidden" name="User" value="1" />' +
+		  '<input type="hidden" name="Password" value="' + id_token + '" />' +
+		  '</form>');
+		$('body').append(form);
+		form.submit();
+}
+
+function onFailure(error) {
+  console.log(error);
+}
+
+function onLoad() {
+	gapi.load('auth2', function() {
+
+		auth2 = gapi.auth2.init({
+			client_id: '[% Data.GoogleClientID %]',
+			fetch_basic_profile: true,
+			scope: 'email',
+		}).then(function(){
+				gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
+
+[% RenderBlockStart("Logout") %]
+				var auth2 = gapi.auth2.getAuthInstance();
+				auth2.disconnect().then(function (){
+					gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
+				});
+				auth2.signOut().then(function () {
+					gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
+					console.log('User signed out.')
+				});
+[% RenderBlockEnd("Logout") %]
+
+				gapi.signin2.render('glogin', {
+					'scope': 'email',
+					'height': 30,
+					'longtitle': true,
+					'onsuccess': onSignIn,
+					'onfailure': onFailure,
+					'prompt':'select_account'
+				});
+			});
+	});
 }
 
 //]]></script>
-[% WRAPPER JSOnDocumentComplete %]
-
-[% END %]
-
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
