@@ -24,7 +24,8 @@ function onLoad() {
 		}).then(function(){
 				gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
 
-[% RenderBlockStart("Logout") %]
+# @TODO: Signout only 
+# [% RenderBlockStart("Logout") %]
 				var auth2 = gapi.auth2.getAuthInstance();
 				auth2.disconnect().then(function (){
 					gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
@@ -33,7 +34,7 @@ function onLoad() {
 					gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
 					console.log('User signed out.')
 				});
-[% RenderBlockEnd("Logout") %]
+# [% RenderBlockEnd("Logout") %]
 
 				gapi.signin2.render('glogin', {
 					'scope': 'email',
